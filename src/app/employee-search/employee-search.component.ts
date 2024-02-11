@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Department } from '../model/department';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
-
+import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
+import { EmployeeService } from '../service/employee.service';
+import { Employee } from '../model/employee';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-employee-search',
   standalone: true,
@@ -17,7 +19,9 @@ import { PanelModule } from 'primeng/panel';
     FormsModule,
     DropdownModule,
     RadioButtonModule,
-    InputTextModule
+    InputTextModule,
+    TableModule,
+    ButtonModule
     ],
   templateUrl: './employee-search.component.html',
   styleUrl: './employee-search.component.scss'
@@ -31,5 +35,24 @@ export class EmployeeSearchComponent {
     { "code": 1, "name": "Mavel" },
     { "code": 2, "name": "DC" }
   ];
+  
+  private employeeService = inject(EmployeeService);
 
+  getEmployee() {
+    return this.employeeService.getEmployees();
+  }
+
+  addEmployee() {
+    const employee = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      gender: this.gender,
+      department: this.department
+    } as Employee;
+    this.employeeService.addEmployee(employee);
+  }
+
+  clearEmployee() {
+    this.employeeService.clearEmployee();
+  }
 }
