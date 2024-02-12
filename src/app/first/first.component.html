@@ -1,8 +1,26 @@
-<p>{{name}}</p>
+<h1>ngFor</h1>
+<div *ngFor="let color of colors index as i; first as isFirst">{{isFirst}}{{i}}{{color}}</div>
+<hr>
+<h1>for</h1>
+@for (color of colors; track color) {
+<div>{{$first}}{{$index}}{{color}}</div>
+}
+<hr>
+<h1>if</h1>
+@if (displayName){
+<div>Name {{name}}</div>
+}@else{
+<div>Name</div>
+}
+<div>
+    <input type="text" (keyup)="onKeyup($event)">
+</div>
+<hr>
+<h1>ngIf</h1>
+<div *ngIf="displayLastName">Last Name {{lastName}}</div>
+<div *ngIf="!displayLastName">Last Name</div>
+<input type="text" [(ngModel)]="lastName">
 
-<input type="text" pInputText (keyup)="onKeyup($event)">
-
-<i class="pi pi-check"></i>
 
 
 <div class="grid">
