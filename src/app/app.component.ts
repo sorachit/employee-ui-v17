@@ -1,14 +1,22 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { EmployeeSearchComponent } from './employee-search/employee-search.component';
+import { FirstComponent } from "./first/first.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ RouterOutlet, EmployeeSearchComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    imports: [RouterOutlet, FirstComponent]
 })
 export class AppComponent {
   title = 'employee-ui';
+  appvalue = 'appvalue';
+
+  inputChange(name: string) {
+    this.appvalue = name;
+  }
+  
+
+
 }
