@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 @Component({
@@ -9,9 +9,8 @@ import { InputTextModule } from 'primeng/inputtext';
   templateUrl: './first.component.html',
   styleUrl: './first.component.scss'
 })
-export class FirstComponent {
+export class FirstComponent implements OnInit {
   colors : string[] = ['Red', 'Blue', 'White'];
-
   @Input()
   name?: string;
   displayName: boolean = true;
@@ -19,6 +18,11 @@ export class FirstComponent {
   displayLastName: boolean = true;
   @Output()
   valueChange = new EventEmitter();
+  ngOnInit(): void {
+    this.name = 'Jame'
+    this.lastName = 'Cameron';
+  }
+  
 
   onKeyup(event: Event) {
     this.name = (event.target as HTMLInputElement).value;
