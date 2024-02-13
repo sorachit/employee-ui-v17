@@ -27,7 +27,8 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './employee-search.component.scss'
 })
 export class EmployeeSearchComponent {
-  private employeeService = inject(EmployeeService);
+  constructor(private employeeService: EmployeeService) { }
+  private employeeServiceV17 = inject(EmployeeService);
   firstName?: string;
   lastName?: string;
   gender?: string;
