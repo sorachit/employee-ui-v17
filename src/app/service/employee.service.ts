@@ -32,10 +32,11 @@ export class EmployeeService {
     this.employees = [];
   }
 
-  
-
   addEmployee(employee: Employee) {
-    this.employees.push(employee);
+    this.http.post<Employee>('/api/employee', employee)
+      .subscribe(response => {
+      this.employees.push(response);
+    });
   }
 
 
