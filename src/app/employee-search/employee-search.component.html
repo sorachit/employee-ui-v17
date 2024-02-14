@@ -48,6 +48,9 @@
     </div>
   </div>
 </p-panel>
+<div class="col-1">
+  <button pButton pRipple label="Add" (click)="gotoSave()"></button>
+</div>
 <p-table [value]="employeeService.employees" responsiveLayout="scroll">
   <ng-template pTemplate="header">
     <tr>
@@ -55,6 +58,7 @@
       <th id="lastName">LastName</th>
       <th id="gender">Gender</th>
       <th id="department">Department</th>
+      <th id="edit"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-employee>
@@ -63,6 +67,9 @@
       <td>{{employee.lastName}}</td>
       <td>{{employee.gender}}</td>
       <td>{{employee.department.name}}</td>
+      <td class="flex-space-around">
+        <a class="pi pi-pencil" [routerLink]="['/save' , employee.id ]"></a>
+      </td>
     </tr>
   </ng-template>
 </p-table>

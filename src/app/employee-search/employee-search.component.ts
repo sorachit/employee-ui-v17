@@ -1,20 +1,21 @@
-import { Component, inject } from '@angular/core';
-import { Department } from '../model/department';
-import { RouterOutlet } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
-import { DropdownModule } from 'primeng/dropdown';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
-import { PanelModule } from 'primeng/panel';
-import { EmployeeService } from '../service/employee.service';
-import { Employee } from '../model/employee';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { PanelModule } from 'primeng/panel';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { TableModule } from 'primeng/table';
+import { Department } from '../model/department';
+import { Employee } from '../model/employee';
+import { EmployeeService } from '../service/employee.service';
 @Component({
   selector: 'app-employee-search',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,
+  imports: [CommonModule,
+    RouterModule,
     PanelModule,
     FormsModule,
     DropdownModule,
@@ -27,8 +28,8 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './employee-search.component.scss'
 })
 export class EmployeeSearchComponent {
+  private router = inject(Router);
   constructor(public employeeService: EmployeeService) { }
-  private employeeServiceV17 = inject(EmployeeService);
   firstName?: string;
   lastName?: string;
   gender?: string;
@@ -57,5 +58,8 @@ export class EmployeeSearchComponent {
   }
   clearEmployee() {
     this.employeeService.clearEmployee();
+  }
+  gotoSave() {
+    this.router.navigate(['/save']);
   }
 }
