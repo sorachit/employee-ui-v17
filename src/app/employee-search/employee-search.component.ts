@@ -5,12 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
-import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 @Component({
   selector: 'app-employee-search',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
     RouterOutlet,
     PanelModule,
     FormsModule,
