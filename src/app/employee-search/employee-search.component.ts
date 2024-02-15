@@ -23,10 +23,9 @@ import { Gender } from '../type/gender';
   styleUrl: './employee-search.component.scss'
 })
 export class EmployeeSearchComponent {
-  Gender = Gender;
   firstName?: string;
   lastName?: string;
-  gender?: Gender;
+  gender?: string;
   department?: string;
   departments: Department[] = [
     { "code": 1, "name": "Mavel" },
