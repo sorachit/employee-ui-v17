@@ -55,7 +55,11 @@ export class EmployeeSaveComponent implements OnInit {
     this.mode = mode;
     const { id } = this.activeRoute.snapshot.params;
     this.id = id;
-    this.employeeForm.get('firstName')?.setValue('Jame');
+    if (id && Mode.EDIT === mode) {
+      this.employeeService.getEmployeeById(id).subscribe(response => {
+        this.employeeForm.patchValue(response);
+      });
+    }
   }
 
   saveEmployee() {

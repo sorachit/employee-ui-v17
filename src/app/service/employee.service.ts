@@ -8,6 +8,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class EmployeeService {
   http = inject(HttpClient);
   employees: Employee[] = [];
+  getEmployeeById(id: number) {
+    return this.http.get<Employee>(`/api/employee/${id}`);
+  }
   getEmployees(employee: Employee):void {
     let httpParams = new HttpParams();
     if (employee.firstName) {
