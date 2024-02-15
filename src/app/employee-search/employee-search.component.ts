@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Department } from '../model/department';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 import { Gender } from '../type/gender';
 import { GenderPipe } from '../pipe/gender.pipe';
+import { TableModule } from 'primeng/table';
+import { EmployeeService } from '../service/employee.service';
 @Component({
   selector: 'app-employee-search',
   standalone: true,
@@ -19,12 +21,15 @@ import { GenderPipe } from '../pipe/gender.pipe';
     DropdownModule,
     RadioButtonModule,
     InputTextModule,
-    GenderPipe
+    GenderPipe,
+    TableModule
   ],
   templateUrl: './employee-search.component.html',
   styleUrl: './employee-search.component.scss'
 })
 export class EmployeeSearchComponent {
+  employeeService = inject(EmployeeService);
+
   Gender = Gender;
   firstName?: string;
   lastName?: string;
