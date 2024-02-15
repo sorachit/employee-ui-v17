@@ -7,7 +7,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
-import { Gender } from '../type/gender';
 @Component({
   selector: 'app-employee-search',
   standalone: true,
