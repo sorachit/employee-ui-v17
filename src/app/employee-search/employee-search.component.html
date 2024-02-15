@@ -14,31 +14,26 @@
     </div>
     <div class="col-6">
       <div class="grid">
-        <div class="col-2">
-          <p-radioButton value="Female" label="Female" [(ngModel)]="gender">
-          </p-radioButton>
-        </div>
-        <div class="col-2">
-          <p-radioButton value="Male" label="Male" [(ngModel)]="gender">
+        <div *ngFor="let item of Gender | keyvalue" class="col-2">
+          <p-radioButton [value]="item.value" [label]="item.value" [(ngModel)]="gender">
           </p-radioButton>
         </div>
       </div>
     </div>
   </div>
-    <div class="grid">
-      <div class="col-2">
-        FirstName
-      </div>
-      <div class="col-4">
-        <input type="text" pInputText [(ngModel)]="firstName" />
-      </div>
+  <div class="grid">
+    <div class="col-2">
+      FirstName
     </div>
-    <div class="grid">
-      <div class="col-2">
-        LastName
-      </div>
-      <div class="col-4">
-        <input type="text" pInputText [(ngModel)]="lastName" />
-      </div>
+    <div class="col-4">
+      <input type="text" pInputText [(ngModel)]="firstName" />
     </div>
-</p-panel>
+  </div>
+  <div class="grid">
+    <div class="col-2">
+      LastName
+    </div>
+    <div class="col-4">
+      <input type="text" pInputText [(ngModel)]="lastName" />
+    </div>
+  </div>
