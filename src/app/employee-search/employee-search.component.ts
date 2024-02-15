@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 import { Gender } from '../type/gender';
+import { GenderPipe } from '../pipe/gender.pipe';
 @Component({
   selector: 'app-employee-search',
   standalone: true,
@@ -18,6 +19,7 @@ import { Gender } from '../type/gender';
     DropdownModule,
     RadioButtonModule,
     InputTextModule,
+    GenderPipe
   ],
   templateUrl: './employee-search.component.html',
   styleUrl: './employee-search.component.scss'
