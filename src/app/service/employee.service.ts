@@ -42,5 +42,11 @@ export class EmployeeService {
     });
   }
 
+  editEmployee(employee: Employee) {
+    return this.http.put<Employee>(`/api/employee`, employee);
+  }
 
+  deleteEmployee(id: number) {
+    return this.http.delete(`/api/employee/${id}`);
+  }
 }

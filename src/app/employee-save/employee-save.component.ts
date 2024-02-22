@@ -47,6 +47,7 @@ export class EmployeeSaveComponent implements OnInit {
     lastName: new FormControl(null, Validators.required),
     gender: new FormControl(Gender.MALE),
     department: new FormControl(null, Validators.required),
+    version:  new FormControl(),
   })
   
   
@@ -65,7 +66,13 @@ export class EmployeeSaveComponent implements OnInit {
   saveEmployee() {
     const employee = this.employeeForm.value as Employee;
     if (this.employeeForm.valid) {
-      this.employeeService.addEmployee(employee);
+      if (Mode.EDIT === this.mode) {
+        this.employeeService.editEmployee(employee).subscribe(response => {
+          this.employeeForm.patchValue(response);
+        });
+      } else {
+        this.employeeService.addEmployee(employee);
+      }
     }
   }
 
