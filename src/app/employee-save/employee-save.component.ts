@@ -32,6 +32,7 @@ import { CommonModule } from '@angular/common';
 export class EmployeeSaveComponent implements OnInit {
   id?: string;
   mode!: Mode;
+  Mode = Mode;
   activeRoute = inject(ActivatedRoute);
   employeeService= inject(EmployeeService);
   
@@ -76,8 +77,10 @@ export class EmployeeSaveComponent implements OnInit {
     }
   }
 
-  clearEmployee() {
-    // this.employeeService.clearEmployee();
+  deleteEmployee() {
+    const id = this.employeeForm.get("id")?.value;
+      this.employeeService.deleteEmployee(id).subscribe(response => {
+    });
   }
 
 }
