@@ -11,7 +11,7 @@ export class EmployeeService {
   getEmployeeById(id: number) {
     return this.http.get<Employee>(`/api/employee/${id}`);
   }
-  getEmployees(employee: Employee):void {
+  getEmployees(employee: Employee): void {
     let httpParams = new HttpParams();
     if (employee.firstName) {
       httpParams = httpParams.append('firstName', employee.firstName);
@@ -27,8 +27,8 @@ export class EmployeeService {
     }
     this.http.get<Employee[]>('/api/employee/search', { params: httpParams })
       .subscribe(response => {
-      this.employees = response;
-    });
+        this.employees = response;
+      });
   }
 
   clearEmployee() {
@@ -38,15 +38,23 @@ export class EmployeeService {
   addEmployee(employee: Employee) {
     this.http.post<Employee>('/api/employee', employee)
       .subscribe(response => {
-      this.employees.push(response);
-    });
+        this.employees.push(response);
+      });
   }
 
   editEmployee(employee: Employee) {
-    return this.http.put<Employee>(`/api/employee`, employee);
+    return this.http.put<Employee>(`/api/employee`, employee)
+      .subscribe(response => {
+        // update ค่าที่อยู่ใน array ด้วย response ที่มาจาก api
+        this.employees = this.employees.map((table: Employee) => 
+           table.id === response.id ? response : table
+        )
+      });
   }
 
   deleteEmployee(id: number) {
-    return this.http.delete(`/api/employee/${id}`);
+    this.http.delete(`/api/employee/${id}`).subscribe(() =>
+      this.employees = this.employees.filter((res: Employee) => res.id !== id)
+    );
   }
 }

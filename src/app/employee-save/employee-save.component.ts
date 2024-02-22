@@ -68,9 +68,7 @@ export class EmployeeSaveComponent implements OnInit {
     const employee = this.employeeForm.value as Employee;
     if (this.employeeForm.valid) {
       if (Mode.EDIT === this.mode) {
-        this.employeeService.editEmployee(employee).subscribe(response => {
-          this.employeeForm.patchValue(response);
-        });
+        this.employeeService.editEmployee(employee)
       } else {
         this.employeeService.addEmployee(employee);
       }
@@ -79,8 +77,7 @@ export class EmployeeSaveComponent implements OnInit {
 
   deleteEmployee() {
     const id = this.employeeForm.get("id")?.value;
-      this.employeeService.deleteEmployee(id).subscribe(response => {
-    });
+    this.employeeService.deleteEmployee(id);
   }
 
 }
