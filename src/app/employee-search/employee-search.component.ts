@@ -27,8 +27,7 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './employee-search.component.scss'
 })
 export class EmployeeSearchComponent {
-  constructor(public employeeService: EmployeeService) { }
-  private employeeServiceV17 = inject(EmployeeService);
+  employeeService = inject(EmployeeService);
   firstName?: string;
   lastName?: string;
   gender?: string;
@@ -45,15 +44,6 @@ export class EmployeeSearchComponent {
       department:this.department
     } as Employee
     this.employeeService.getEmployees(employee);
-  }
-  addEmployee() {
-    const employee = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      gender: this.gender,
-      department: this.department
-    } as Employee;
-    this.employeeService.addEmployee(employee);
   }
   clearEmployee() {
     this.employeeService.clearEmployee();
