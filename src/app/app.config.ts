@@ -9,8 +9,8 @@ import { ErrorInterceptor } from './error-interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
   provideAnimations(),
-  provideHttpClient(withInterceptorsFromDi()),
     MessageService,
+  provideHttpClient(withInterceptorsFromDi()),
   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 };
