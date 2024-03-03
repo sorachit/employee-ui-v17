@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -11,6 +11,8 @@ import { TableModule } from 'primeng/table';
 import { Department } from '../model/department';
 import { Employee } from '../model/employee';
 import { EmployeeService } from '../service/employee.service';
+import { Gender } from '../type/gender';
+import { debounceTime, switchMap } from 'rxjs';
 @Component({
   selector: 'app-employee-search',
   standalone: true,
@@ -22,40 +24,35 @@ import { EmployeeService } from '../service/employee.service';
     RadioButtonModule,
     InputTextModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule
     ],
   templateUrl: './employee-search.component.html',
   styleUrl: './employee-search.component.scss'
 })
-export class EmployeeSearchComponent {
+export class EmployeeSearchComponent implements OnInit{
   private router = inject(Router);
   constructor(public employeeService: EmployeeService) { }
-  firstName?: string;
-  lastName?: string;
-  gender?: string;
-  department?: string;
+  
+  employeeForm: FormGroup = new FormGroup({
+    id: new FormControl(),
+    firstName: new FormControl(null),
+    lastName: new FormControl(null),
+    gender: new FormControl(Gender.MALE),
+    department: new FormControl(null),
+  })
   departments: Department[] = [
     { "code": 1, "name": "Mavel" },
     { "code": 2, "name": "DC" }
   ];
-  getEmployee() {
-    const employee = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      gender: this.gender,
-      department:this.department
-    } as Employee
-    this.employeeService.getEmployees(employee);
+
+  ngOnInit(): void {
+    this.employeeForm.valueChanges.pipe(
+      debounceTime(200),
+      switchMap((employeeFormValue) => this.employeeService.getEmployees(employeeFormValue))
+    ).subscribe();
   }
-  addEmployee() {
-    const employee = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      gender: this.gender,
-      department: this.department
-    } as Employee;
-    this.employeeService.addEmployee(employee);
-  }
+
   clearEmployee() {
     this.employeeService.clearEmployee();
   }

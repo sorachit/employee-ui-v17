@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Employee } from '../model/employee';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class EmployeeService {
   getEmployeeById(id: number) {
     return this.http.get<Employee>(`/api/employee/${id}`);
   }
-  getEmployees(employee: Employee): void {
+  getEmployees(employee: Employee) : Observable<Employee[]> {
     let httpParams = new HttpParams();
     if (employee.firstName) {
       httpParams = httpParams.append('firstName', employee.firstName);
@@ -28,10 +28,10 @@ export class EmployeeService {
     if (employee.department) {
       httpParams = httpParams.append('department', employee.department.code);
     }
-    this.http.get<Employee[]>('/api/employee/search', { params: httpParams })
-      .subscribe(response => {
+    return this.http.get<Employee[]>('/api/employee/search', { params: httpParams })
+      .pipe(tap(response => {
         this.employees = response;
-      });
+      }));
   }
 
   clearEmployee() {
