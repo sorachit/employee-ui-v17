@@ -40,15 +40,6 @@ export class EmployeeSearchComponent {
   getEmployee() {
     return this.employeeService.getEmployees();
   }
-  addEmployee() {
-    const employee = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      gender: this.gender,
-      department: this.department
-    } as Employee;
-    this.employeeService.addEmployee(employee);
-  }
   clearEmployee() {
     this.employeeService.clearEmployee();
   }
