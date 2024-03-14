@@ -1,0 +1,8 @@
+<div>
+    {{userService.user$ | async | json}}
+</div>
+<div>
+    <p-dropdown [options]="departments" [(ngModel)]="department" optionLabel="name" 
+    (onChange)="changeDepartment($event)">
+    </p-dropdown>
+</div> 
